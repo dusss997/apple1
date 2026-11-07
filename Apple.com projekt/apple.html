@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple</title>
+
+<style>
+/* ================= GENERAL ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 65px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont,
+        "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    background: #fff;
+    color: #1d1d1f;
+    -webkit-font-smoothing: antialiased;
+}
+
+section, .product-card {
+    scroll-margin-top: 65px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
+    padding: 0 20px;
+    background: rgba(22,22,23,.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.navbar a {
+    position: relative;
+    color: #d6d6d6;
+    font-size: 12px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .25s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: #fff;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width .3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.apple-logo {
+    width: 18px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.nav-icon {
+    width: 17px;
+    height: 17px;
+    stroke: #d6d6d6;
+    stroke-width: 1.7;
+    fill: none;
+}
+
+/* ================= BUTTONS ================= */
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 18px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 11px 22px;
+    border: 1px solid #0071e3;
+    border-radius: 30px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: .25s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,113,227,.18);
+}
+
+.btn-blue {
+    background: #0071e3;
+    color: #fff;
+}
+
+.btn-blue:hover {
+    background: #0077ed;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #0071e3;
+}
+
+.btn-outline:hover {
+    background: #0071e3;
+    color: #fff;
+}
+
+/* ================= HERO ================= */
+.hero {
+    position: relative;
+    min-height: 690px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 65px 20px 30px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 10px solid #fff;
+}
+
+.hero h1 {
+    font-size: clamp(38px,5vw,58px);
+    letter-spacing: -.035em;
+}
+
+.hero h2 {
+    font-size: clamp(21px,2.6vw,30px);
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.hero p {
+    color: #86868b;
+    font-size: 19px;
+    margin-top: 12px;
+}
+
+.dark-hero {
+    background-color: #000;
+    color: #fff;
+}
+
+.macbook-pro {
+    margin-top: 48px;
+    background-image: url("mackbook-pro.jpg");
+}
+
+.macbook-pro h2 {
+    background: linear-gradient(
+        90deg,#ffd60a,#64d2ff,#0a84ff,#bf5af2
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.macbook-m6 {
+    background-image:
+        url("hero_macbook_pro_m6_preorder__djr4reqm3ziq_large_2x.jpg");
+}
+
+.iphone-duo {
+    min-height: 790px;
+    background: #fff;
+}
+
+.iphone-duo h1 {
+    font-size: clamp(48px,6vw,70px);
+}
+
+.iphone-picture {
+    width: min(850px,94%);
+    max-height: 520px;
+    object-fit: contain;
+    margin-top: 35px;
+}
+
+/* ================= PRODUCT GRID ================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+    padding: 12px;
+    background: #fff;
+}
+
+.product-card {
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 50px 20px 20px;
+    background: #f5f5f7;
+}
+
+.product-card h2 {
+    font-size: clamp(32px,3vw,43px);
+    font-weight: 600;
+    letter-spacing: -.035em;
+}
+
+.product-card h3 {
+    font-size: clamp(18px,2vw,24px);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-top: 10px;
+}
+
+.product-card p {
+    color: #6e6e73;
+    font-size: 17px;
+    margin-top: 12px;
+}
+
+.black-card {
+    background: #000;
+    color: #fff;
+}
+
+.white-card {
+    background: #fff;
+}
+
+.product-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.product-title img {
+    width: 30px;
+    height: 35px;
+    object-fit: contain;
+}
+
+/* ================= PRODUCT IMAGES ================= */
+.image-area {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 25px 0;
+}
+
+.image-area img {
+    max-width: 85%;
+    max-height: 330px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform .6s;
+}
+
+.image-area img:hover {
+    transform: scale(1.05);
+}
+
+.imac-image {
+    width: 390px !important;
+}
+
+.iphone18-image {
+    width: 310px !important;
+}
+
+.ipad-image {
+    width: 450px !important;
+}
+
+.watch-image {
+    width: 340px !important;
+}
+
+.card-image {
+    width: 360px !important;
+}
+
+/* ================= BACKGROUNDS ================= */
+#ipad,
+#ipad .image-area {
+    background: #fbfbfb;
+}
+
+#card,
+#card .image-area {
+    background: #fafafa;
+}
+
+/* ================= RAINBOW TEXT ================= */
+.rainbow-text {
+    background: linear-gradient(
+        90deg,#34c759,#ffd60a,
+        #ff9f0a,#ff453a,#bf5af2,#0a84ff
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* ================= WATCH 360 ================= */
+.watch-360 {
+    position: relative;
+    perspective: 1100px;
+    isolation: isolate;
+}
+
+.watch-360::before {
+    content: "";
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #007aff,
+        #a855f7,
+        #ff2d55,
+        #ff9500,
+        #30d158,
+        #007aff
+    );
+    filter: blur(55px);
+    opacity: .40;
+    animation: watchColors 6s linear infinite;
+    z-index: -1;
+}
+
+.watch-360 .watch-image {
+    position: relative;
+    z-index: 1;
+    max-width: 85%;
+    max-height: 330px;
+    object-fit: contain;
+    transform-style: preserve-3d;
+    animation: watchRotate360 8s linear infinite;
+}
+
+.watch-360 .watch-image:hover {
+    animation-play-state: paused;
+}
+
+@keyframes watchRotate360 {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes watchColors {
+    from {
+        transform: rotate(0deg);
+        filter: blur(55px) hue-rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+        filter: blur(55px) hue-rotate(360deg);
+    }
+}
+
+/* ================= UPGRADE SLIDESHOW ================= */
+#upgrade .upgrade-animation {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    height: 350px;
+    margin: 25px auto 0;
+    overflow: hidden;
+}
+
+#upgrade .upgrade-slide {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transform: translateY(22px) scale(.9);
+    transition:
+        opacity .65s ease,
+        transform .85s ease;
+}
+
+#upgrade .upgrade-slide.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ================= REVEAL ================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(55px) scale(.97);
+    transition:
+        opacity .85s ease,
+        transform .85s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@keyframes targetGlow {
+    0%,100% {
+        box-shadow: inset 0 0 0 0 rgba(0,113,227,0);
+    }
+    35% {
+        box-shadow: inset 0 0 0 4px rgba(0,113,227,.2);
+    }
+}
+
+.target-highlight {
+    animation: targetGlow 1.3s ease;
+}
+
+/* ================= ENTERTAINMENT ================= */
+.entertainment {
+    padding: 35px 0 20px;
+    overflow: hidden;
+}
+
+.entertainment h2 {
+    text-align: center;
+    font-size: clamp(30px,4vw,45px);
+    margin-bottom: 25px;
+}
+
+.entertainment-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 8px;
+}
+
+.entertainment-card {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+    background: #000;
+}
+
+.entertainment-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.entertainment-info {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #fff;
+    font-size: 14px;
+    text-shadow: 0 1px 5px #000;
+}
+
+.stream-button {
+    border: 0;
+    background: #fff;
+    color: #000;
+    border-radius: 30px;
+    padding: 11px 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.entertainment-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.small-entertainment-card {
+    min-width: 290px;
+    height: 190px;
+}
+
+.small-entertainment-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background: #f5f5f7;
+    color: #6e6e73;
+    padding: 35px 8%;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1000px) {
+    .navbar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 23px;
+    }
+
+    .hero {
+        min-height: 580px;
+    }
+
+    .product-card {
+        min-height: 560px;
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        height: 44px;
+        gap: 20px;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .hero {
+        min-height: 520px;
+        padding-top: 60px;
+    }
+
+    .iphone-duo {
+        min-height: 630px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        padding: 6px 0;
+    }
+
+    .product-card {
+        min-height: 550px;
+    }
+
+    .product-card h2 {
+        font-size: 36px;
+    }
+
+    .image-area img {
+        max-height: 290px;
+    }
+
+    #upgrade .upgrade-animation {
+        height: 280px;
+    }
+
+    .watch-360::before {
+        width: 230px;
+        height: 230px;
+    }
+
+    .entertainment-main {
+        grid-template-columns: 1fr;
+    }
+
+    .entertainment-card {
+        height: 350px;
+    }
+
+    .small-entertainment-card {
+        min-width: 250px;
+        height: 160px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .watch-360 .watch-image,
+    .watch-360::before {
+        animation: none !important;
+    }
+
+    #upgrade .upgrade-slide {
+        transition: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header>
+<nav class="navbar">
+
+<a href="#top" aria-label="Apple Home">
+    <img
+        src="new-Apple-logo-white-png-large-size (1).png"
+        alt="Apple"
+        class="apple-logo">
+</a>
+
+<a href="store.html">Store</a>
+<a href="#mac" class="nav-link">Mac</a>
+<a href="#ipad" class="nav-link">iPad</a>
+<a href="#iphone" class="nav-link">iPhone</a>
+<a href="#watch" class="nav-link">Watch</a>
+<a href="#" class="hide-mobile">Vision</a>
+<a href="#" class="hide-mobile">AirPods</a>
+<a href="#upgrade" class="nav-link">Upgrade</a>
+<a href="#card" class="nav-link">Card</a>
+<a href="#entertainment" class="nav-link hide-mobile">
+    Entertainment
+</a>
+<a href="#" class="hide-mobile">Support</a>
+
+<a href="#" aria-label="Search">
+<svg class="nav-icon" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5"/>
+    <path d="M15.5 15.5L21 21"/>
+</svg>
+</a>
+
+<a href="#" aria-label="Shopping bag">
+<svg class="nav-icon" viewBox="0 0 24 24">
+    <path d="M4 8h16l-1 13H5L4 8Z"/>
+    <path d="M9 9V6a3 3 0 0 1 6 0v3"/>
+</svg>
+</a>
+
+</nav>
+</header>
+
+<main id="top">
+
+<!-- ================= MACBOOK PRO ================= -->
+<section class="hero dark-hero macbook-pro" id="mac">
+
+<h1>MacBook Pro</h1>
+<h2>PROLED XDR Display</h2>
+<p>Available starting 11.6</p>
+
+<div class="buttons">
+    <a href="#mac" class="btn btn-blue">Learn more</a>
+    <a href="store.html" class="btn btn-outline">Pre-order</a>
+</div>
+
+</section>
+
+<!-- ================= MACBOOK M6 ================= -->
+<section class="hero dark-hero macbook-m6">
+
+<h1>MacBook Pro</h1>
+<h2>14-inch model now with M6.</h2>
+<p>Available starting 11.6</p>
+
+<div class="buttons">
+    <a href="#mac" class="btn btn-blue">Learn more</a>
+    <a href="store.html" class="btn btn-outline">Shop</a>
+</div>
+
+</section>
+
+<!-- ================= IPHONE DUO ================= -->
+<section class="hero iphone-duo" id="iphone">
+
+<h1>iPhone Duo</h1>
+<h2>Hello, hello.</h2>
+
+<div class="buttons">
+    <a href="#iphone" class="btn btn-blue">Learn more</a>
+    <a href="store.html" class="btn btn-outline">Buy</a>
+</div>
+
+<img
+    src="Apple-iPhone-Duo-opening-iPhone-Duo-260909-lp.jpg.og.jpg"
+    alt="iPhone Duo"
+    class="iphone-picture">
+
+</section>
+
+<!-- ================= IMAC + IPHONE 18 PRO ================= -->
+<section class="product-grid">
+
+<div class="product-card white-card reveal" id="imac">
+
+    <h2>iMac</h2>
+    <h3>
+        A<span class="rainbow-text">IIII</span> that.
+        <br>
+        And a brand-new chip.
+    </h3>
+    <p>Available starting 11.6</p>
+
+    <div class="buttons">
+        <a href="#imac" class="btn btn-blue">Learn more</a>
+        <a href="store.html" class="btn btn-outline">Pre-order</a>
+    </div>
+
+    <div class="image-area">
+        <img
+            src="images (1).jpg"
+            alt="iMac"
+            class="imac-image">
+    </div>
+
+</div>
+
+<div class="product-card black-card reveal" id="iphone18">
+
+    <h2>iPhone 18 Pro</h2>
+    <h3>Pro further.</h3>
+
+    <div class="buttons">
+        <a href="#iphone18" class="btn btn-blue">Learn more</a>
+        <a href="store.html" class="btn btn-outline">Buy</a>
+    </div>
+
+    <div class="image-area">
+        <img
+            src="Screenshot 2026-11-01 192416.png"
+            alt="iPhone 18 Pro"
+            class="iphone18-image">
+    </div>
+
+</div>
+
+</section>
+
+<!-- ================= IPAD PRO + WATCH ================= -->
+<section class="product-grid">
+
+<div class="product-card reveal" id="ipad">
+
+    <h2>iPad Pro</h2>
+    <h3>Unbelievably thin. Incredibly powerful.</h3>
+
+    <div class="buttons">
+        <a href="ipad.html" class="btn btn-blue">Learn more</a>
+        <a href="store.html" class="btn btn-outline">Buy</a>
+    </div>
+
+    <div class="image-area">
+        <img
+            src="ipad-pro-finish-unselect-gallery-1-202405_FMT_WHH.jpg"
+            data-image-base="ipad-pro-finish-unselect-gallery-1-202405_FMT_WHH"
+            alt="iPad Pro"
+            class="ipad-image">
+    </div>
+
+</div>
+
+<!-- APPLE WATCH SIPER -->
+<div class="product-card black-card reveal" id="watch">
+
+    <h2 class="product-title">
+        <img
+            src="new-Apple-logo-white-png-large-size (1).png"
+            alt="">
+        WATCH SERIES 9
+    </h2>
+
+    <h3>Smarter. Brighter. Mightier.</h3>
+
+    <div class="buttons">
+        <a href="#watch" class="btn btn-blue">Learn more</a>
+        <a href="store.html" class="btn btn-outline">Buy</a>
+    </div>
+
+    <div class="image-area watch-360">
+        <img
+            src="apple-watch-series-9.jpg"
+            data-image-base="apple-watch-series-9"
+            alt="Apple Watch Series 9"
+            class="watch-image">
+    </div>
+
+</div>
+
+</section>
+
+<!-- ================= UPGRADE + CARD ================= -->
+<section class="product-grid">
+
+<div class="product-card reveal" id="upgrade">
+
+    <h2 class="product-title">
+        <img
+            src="Gallery/6bed123accf95b38fb97e32f39df4c2e (1).jpg"
+            alt="">
+        Upgrade
+    </h2>
+
+    <h3>Love it. Lease it. Upgrade it.</h3>
+
+    <div class="buttons">
+        <a href="#upgrade" class="btn btn-blue">Learn more</a>
+    </div>
+
+    <!-- KETU KEMI TE NJEJTEN FOTO WATCH SI SIPER -->
+    <div class="upgrade-animation" id="upgradeAnimation">
+
+        <img
+            src="iphone-18-pro-max-witb-silver-202609_FMT_WHH.jpg"
+            class="upgrade-slide active"
+            alt="iPhone 18 Pro Max">
+
+        <img
+            src="ipad-pro-finish-unselect-gallery-1-202405_FMT_WHH.jpg"
+            data-image-base="ipad-pro-finish-unselect-gallery-1-202405_FMT_WHH"
+            class="upgrade-slide"
+            alt="iPad Pro">
+
+        <img
+            src="macbook-neo-witb-silver-202603_FMT_WHH.jpg"
+            class="upgrade-slide"
+            alt="MacBook Neo">
+
+        <img
+            src="apple-watch-series-9.jpg"
+            data-image-base="apple-watch-series-9"
+            class="upgrade-slide"
+            alt="Apple Watch Series 9">
+
+    </div>
+
+</div>
+
+<div class="product-card reveal" id="card">
+
+    <h2 class="product-title">
+        <img
+            src="Gallery/6bed123accf95b38fb97e32f39df4c2e (1).jpg"
+            alt="">
+        Card
+    </h2>
+
+    <h3>
+        Get up to 3% Daily Cash back
+        <br>
+        with every purchase.
+    </h3>
+
+    <div class="buttons">
+        <a href="#card" class="btn btn-blue">Learn more</a>
+        <a href="store.html" class="btn btn-outline">Apply now</a>
+    </div>
+
+    <div class="image-area">
+        <img
+            src="yyAea6ck4FmeHKWimCk2SN-960-80.jpg"
+            alt="Apple Card"
+            class="card-image">
+    </div>
+
+</div>
+
+</section>
+
+<!-- ================= ENTERTAINMENT ================= -->
+<section class="entertainment reveal" id="entertainment">
+
+<h2>Endless entertainment.</h2>
+
+<div class="entertainment-main">
+
+    <div class="entertainment-card">
+        <img src="entertainment-1.jpg" alt="Entertainment">
+    </div>
+
+    <div class="entertainment-card">
+        <img src="entertainment-2.jpg" alt="Apple TV">
+
+        <div class="entertainment-info">
+            <button class="stream-button">Stream now</button>
+            <p>
+                <strong>Crime</strong> ·
+                The only way to save a villain's missing
+                victim is to get close enough to risk
+                becoming one.
+            </p>
+        </div>
+    </div>
+
+    <div class="entertainment-card">
+        <img src="entertainment-3.jpg" alt="Apple TV">
+    </div>
+
+</div>
+
+<div class="entertainment-row">
+
+    <div class="small-entertainment-card">
+        <img src="entertainment-small-1.jpg" alt="Entertainment">
+    </div>
+
+    <div class="small-entertainment-card">
+        <img src="entertainment-small-2.jpg" alt="Entertainment">
+    </div>
+
+    <div class="small-entertainment-card">
+        <img src="entertainment-small-3.jpg" alt="Entertainment">
+    </div>
+
+    <div class="small-entertainment-card">
+        <img src="entertainment-small-4.jpg" alt="Entertainment">
+    </div>
+
+    <div class="small-entertainment-card">
+        <img src="entertainment-small-5.jpg" alt="Entertainment">
+    </div>
+
+    <div class="small-entertainment-card">
+        <img src="entertainment-small-6.jpg" alt="Entertainment">
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+    <p>
+        Apple-inspired educational website.
+        This is an independent demonstration project.
+    </p>
+</footer>
+
+<script>
+/* ================= IMAGE FORMAT DETECTION ================= */
+
+const imageExtensions = [
+    ".avif",
+    ".webp",
+    ".png",
+    ".jpeg",
+    ".jpg"
+];
+
+document.querySelectorAll("[data-image-base]").forEach(img => {
+    const baseName = img.dataset.imageBase;
+    let extensionIndex = 0;
+
+    function tryNextImage() {
+        if (extensionIndex >= imageExtensions.length) {
+            console.error("Image not found:", baseName);
+            return;
+        }
+
+        img.src = baseName + imageExtensions[extensionIndex];
+        extensionIndex++;
+    }
+
+    img.addEventListener("error", tryNextImage);
+    tryNextImage();
+});
+
+/* ================= SCROLL REVEAL ================= */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.12 }
+);
+
+revealElements.forEach(element => {
+    revealObserver.observe(element);
+});
+
+/* ================= UPGRADE EVERY 2 SECONDS ================= */
+
+const upgradeSlides =
+    document.querySelectorAll("#upgrade .upgrade-slide");
+
+let currentUpgradeSlide = 0;
+
+function showNextUpgradeSlide() {
+    if (upgradeSlides.length < 2) return;
+
+    upgradeSlides[currentUpgradeSlide]
+        .classList.remove("active");
+
+    currentUpgradeSlide =
+        (currentUpgradeSlide + 1) % upgradeSlides.length;
+
+    upgradeSlides[currentUpgradeSlide]
+        .classList.add("active");
+}
+
+if (upgradeSlides.length > 1) {
+    setInterval(showNextUpgradeSlide, 2000);
+}
+
+/* ================= NAVIGATION ================= */
+
+const navLinks =
+    document.querySelectorAll(".navbar a[href^='#']");
+
+navLinks.forEach(link => {
+    link.addEventListener("click", event => {
+        const targetId = link.getAttribute("href");
+
+        if (!targetId || targetId === "#") {
+            event.preventDefault();
+            return;
+        }
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        event.preventDefault();
+
+        document.querySelectorAll(".navbar .nav-link")
+            .forEach(item => item.classList.remove("active"));
+
+        if (link.classList.contains("nav-link")) {
+            link.classList.add("active");
+        }
+
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        target.classList.remove("target-highlight");
+        void target.offsetWidth;
+        target.classList.add("target-highlight");
+
+        setTimeout(() => {
+            target.classList.remove("target-highlight");
+        }, 1400);
+
+        history.replaceState(null, "", targetId);
+    });
+});
+
+/* ================= ENTERTAINMENT ================= */
+
+const streamButton = document.querySelector(".stream-button");
+
+if (streamButton) {
+    streamButton.addEventListener("click", () => {
+        document.getElementById("entertainment")
+            .scrollIntoView({ behavior: "smooth" });
+    });
+}
+</script>
+
+</body>
+</html>
